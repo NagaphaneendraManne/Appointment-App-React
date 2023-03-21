@@ -33,7 +33,7 @@ class Appointments extends Component {
 
     if (isFavorite) {
       return appointmentsList.filter(
-        eachTransaction => eachTransaction.isStarred === true,
+        eachTransaction => eachTransaction.isFavorite === true,
       )
     }
     return appointmentsList
@@ -47,17 +47,6 @@ class Appointments extends Component {
     })
   }
 
-  creatingAppointmentsList = () => {
-    const {appointmentsList} = this.state
-    return appointmentsList.map(eachAppointment => (
-      <AppointmentItem
-        key={eachAppointment.id}
-        appointmentDetails={eachAppointment}
-        toggleFavorite={this.toggleFavorite}
-      />
-    ))
-  }
-
   onAddAppointment = event => {
     event.preventDefault()
     const {titleInput, dateInput} = this.state
@@ -66,8 +55,7 @@ class Appointments extends Component {
       : ''
     const newAppointment = {
       id: uuidv4(),
-      titleInput,
-      dateInput,
+      title: titleInput,
       date: formattedDate,
       isFavorite: false,
     }
